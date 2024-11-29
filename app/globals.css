@@ -2,20 +2,104 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom CSS Variables */
 :root {
-  --background: #ffffff;
+  --background: linear-gradient(135deg, #4facfe, #00f2fe); /* Cool gradient */
   --foreground: #171717;
+  --button-bg: #0066ff; /* Button base color */
+  --button-hover: #0055cc; /* Button hover color */
+  --button-active: #0044aa; /* Button active color */
+  --button-border: #003399; /* Button border color */
+  --heading-font: "Arial Black", Gadget, sans-serif;
+  --body-font: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: linear-gradient(135deg, #1f1c2c, #928dab); /* Dark mode gradient */
     --foreground: #ededed;
   }
 }
 
 body {
-  color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-size: 400% 400%;
+  animation: gradientMove 20s ease infinite; /* Animate gradient */
+  color: var(--foreground);
+  font-family: var(--body-font);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+button {
+  background-color: var(--button-bg);
+  color: white;
+  padding: 0.75rem 2rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border: 2px solid var(--button-border);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(45deg);
+  transition: 0.4s ease;
+}
+
+button:hover::after {
+  left: -50%;
+}
+
+button:hover {
+  background-color: var(--button-hover);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 102, 255, 0.5);
+}
+
+button:active {
+  background-color: var(--button-active);
+  transform: scale(0.97); /* Slight press effect */
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.5);
+}
+
+h1 {
+  text-align: center;
+  font-family: var(--heading-font);
+  font-size: 2.5rem;
+  color: var(--foreground);
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation for background gradient */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
